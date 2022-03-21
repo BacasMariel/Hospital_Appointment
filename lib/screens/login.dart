@@ -25,15 +25,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Colors.white,
-                  Colors.blue.shade200,
-                  Colors.white
-                ])
-            ),
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Colors.white, Colors.blue.shade200, Colors.white])),
       child: Form(
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -41,7 +36,9 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  const SizedBox(height: 30,),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                     child: const Text(
@@ -79,9 +76,8 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Enter your Username'
-                              ),
+                                  border: InputBorder.none,
+                                  hintText: 'Enter your Username'),
                             ),
                           ),
                         ),
@@ -115,9 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Enter your Password'
-                              ),
+                                  border: InputBorder.none,
+                                  hintText: 'Enter your Password'),
                               obscureText: true,
                             ),
                           ),
@@ -125,7 +120,9 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 50,),
+                  const SizedBox(
+                    height: 50,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -138,7 +135,9 @@ class _LoginPageState extends State<LoginPage> {
                             horizontal: 140, vertical: 15),
                         textStyle: const TextStyle(fontSize: 15)),
                   ),
-                  const SizedBox(height: 200,),
+                  const SizedBox(
+                    height: 200,
+                  ),
                 ],
               )),
         ),
