@@ -1,6 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hospital_app/frontpage/view/view.dart';
 import 'package:hospital_app/splash/splash.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -13,10 +14,12 @@ class MyApp extends StatelessWidget {
     Key? key,
     required this.authenticationRepository,
     required this.userRepository,
+    required this.dataRepository,
   }) : super(key: key);
 
   final AuthenticationRepository authenticationRepository;
   final UserRepository userRepository;
+  final DataRepository dataRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               LoginBloc(authenticationRepository: authenticationRepository),
+        ),
+        BlocProvider(
+          create: (context) =>
+              DashboardBloc(dataRepository: dataRepository)..add(LoadData()),
         ),
       ],
       child: MaterialApp(
@@ -72,7 +79,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                 break;
               case AuthenticationStatus.unauthenticated:
                 _navigator.pushAndRemoveUntil<void>(
-                  LoginPage.route(),
+                  FirstPage.route(),
                   (route) => false,
                 );
                 break;

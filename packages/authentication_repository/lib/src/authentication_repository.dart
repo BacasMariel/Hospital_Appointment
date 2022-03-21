@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../auth_token/token.dart';
+
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
@@ -63,8 +65,22 @@ class AuthenticationRepository {
     return null;
   }
 
-  void logOut() {
-    _controller.add(AuthenticationStatus.unauthenticated);
+  void logOut() async {
+    try {
+      String? token = await fetchToken();
+      _setHeaders() => {
+            'Accept': 'application/json',
+            'Authorization': token.toString(),
+          };
+
+      final response = await http.get(
+          Uri.parse('http://192.168.254.102:8000/api/logout'),
+          headers: _setHeaders());
+
+      _controller.add(AuthenticationStatus.unauthenticated);
+    } catch (e) {
+      print(e);
+    }
   }
 
   void dispose() => _controller.close();
