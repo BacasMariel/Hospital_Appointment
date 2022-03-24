@@ -23,6 +23,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late List<TotalPatient> _chartData;
   late List<PatientGender>? _circleData;
+  // late List<TotalBedUsed>? _circleTotalBed;
   late List<WithCovid>? _withCovidData;
   TooltipBehavior? _tooltipBehavior;
 
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     _chartData = getChartData();
     _circleData = getChart();
-    _withCovidData = totalWithCovid();
+    // _withCovidData = totalWithCovid();
     _tooltipBehavior = TooltipBehavior(enable: true);
     // super.initState();
   }
@@ -239,10 +240,18 @@ class _HomePageState extends State<HomePage> {
                                             //   overflowMode: LegendItemOverflowMode.wrap),
                                             series: <CircularSeries>[
                                               DoughnutSeries<WithCovid, String>(
-                                                  dataSource: _withCovidData,
+                                                  dataSource: totalWithCovid(
+                                                      state.data
+                                                          .num_of_covid_deaths,
+                                                      state.data
+                                                          .num_of_covid_recovery,
+                                                      state.data
+                                                          .num_of_active_cases,
+                                                      state.data
+                                                          .num_of_new_covid_cases),
                                                   xValueMapper:
                                                       (WithCovid data, _) =>
-                                                          data.death,
+                                                          data.description,
                                                   yValueMapper:
                                                       (WithCovid data, _) =>
                                                           data.cases,
@@ -390,7 +399,9 @@ class _HomePageState extends State<HomePage> {
                                             animation: true,
                                             animationDuration: 1000,
                                             lineHeight: 10,
-                                            percent: 0.4,
+                                            percent: (0.01 *
+                                                state.data
+                                                    .percent_of_icu_bed_used),
                                             barRadius:
                                                 const Radius.circular(10),
                                             progressColor: Colors.blue,
@@ -453,7 +464,9 @@ class _HomePageState extends State<HomePage> {
                                           animation: true,
                                           animationDuration: 1000,
                                           lineHeight: 10,
-                                          percent: 0.7,
+                                          percent: (0.01 *
+                                              state.data
+                                                  .percent_of_isolation_bed_used),
                                           barRadius: const Radius.circular(10),
                                           progressColor: Colors.red,
                                         ),
@@ -503,7 +516,9 @@ class _HomePageState extends State<HomePage> {
                                           animation: true,
                                           animationDuration: 1000,
                                           lineHeight: 10,
-                                          percent: 0.8,
+                                          percent: (0.01 *
+                                              state.data
+                                                  .percent_of_wards_bed_used),
                                           barRadius: const Radius.circular(10),
                                           progressColor: Colors.green,
                                         ),
@@ -529,14 +544,17 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: SfCircularChart(
-                              title: ChartTitle(text: 'Title'),
+                              title: ChartTitle(text: 'Bed Percentage'),
                               tooltipBehavior: _tooltipBehavior,
                               series: <CircularSeries>[
-                                DoughnutSeries<PatientGender, String>(
-                                    dataSource: _circleData,
-                                    xValueMapper: (PatientGender data, _) =>
-                                        data.gender,
-                                    yValueMapper: (PatientGender data, _) =>
+                                DoughnutSeries<TotalBed, String>(
+                                    dataSource: getTotalChart(
+                                        state.data.total_icu_bed,
+                                        state.data.total_wards_bed,
+                                        state.data.total_isolation_bed),
+                                    xValueMapper: (TotalBed data, _) =>
+                                        data.bed_type,
+                                    yValueMapper: (TotalBed data, _) =>
                                         data.total,
                                     dataLabelSettings: const DataLabelSettings(
                                         isVisible: true),
@@ -579,12 +597,22 @@ class _HomePageState extends State<HomePage> {
     return circleData;
   }
 
-  List<WithCovid> totalWithCovid() {
+  List<TotalBed> getTotalChart(icu, wards, isolation) {
+    final List<TotalBed> circleData = [
+      TotalBed('ICU', icu),
+      TotalBed('Wards', wards),
+      TotalBed('Isolation', isolation)
+    ];
+
+    return circleData;
+  }
+
+  List<WithCovid> totalWithCovid(deaths, recovery, active, newCases) {
     final List<WithCovid> withCovidData = [
-      WithCovid('Deaths', 30),
-      WithCovid('Recoveries', 50),
-      WithCovid('Active Cases', 5),
-      WithCovid('New Cases', 5),
+      WithCovid('Deaths', deaths),
+      WithCovid('Recoveries', recovery),
+      WithCovid('Active Cases', active),
+      WithCovid('New Cases', newCases),
     ];
     return withCovidData;
   }
@@ -602,9 +630,15 @@ class PatientGender {
   final int total;
 }
 
+class TotalBed {
+  TotalBed(this.bed_type, this.total);
+  final String bed_type;
+  final int total;
+}
+
 class WithCovid {
-  WithCovid(this.death, this.cases);
-  final String death;
+  WithCovid(this.description, this.cases);
+  final String description;
   final int cases;
 }
 
