@@ -696,14 +696,6 @@ class _MenuState extends State<Menu> {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const Appointment()));
             }),
-            CustomListTile(Icons.logout, 'Log Out', () {
-              // Navigator.of(context)
-              //     .push(MaterialPageRoute(builder: (context) => const FirstPage()));
-
-              context
-                  .read<AuthenticationBloc>()
-                  .add(AuthenticateLogoutRequested());
-            })
           ],
         );
       },
