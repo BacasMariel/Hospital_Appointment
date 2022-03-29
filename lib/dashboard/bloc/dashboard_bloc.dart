@@ -23,7 +23,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   ) async {
     try {
       final data = await _tryGetData();
-
       if (data != null) {
         emit(const DataMessage("Data Is Loaded"));
         emit(DataLoaded(data: data));
@@ -38,11 +37,11 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   Future<DataApi?> _tryGetData() async {
     try {
-      String token = await fetchToken();
+      // String token = await fetchToken();
+      String token = 'practice';
       final data = await _dataRepository.getData(token);
-
       return data;
-    } catch (_) {
+    } catch (e) {
       return null;
     }
   }
