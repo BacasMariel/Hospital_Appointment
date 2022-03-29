@@ -38,7 +38,7 @@ class _UtilityState extends State<Utility> {
             const BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: 'Patients'),
             const BottomNavigationBarItem(
-                icon: Icon(Icons.bed), label: 'Unsay itawag ani'),
+                icon: Icon(Icons.bed), label: 'Beds'),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.blue[400],

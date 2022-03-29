@@ -228,9 +228,27 @@ class _HomePageState extends State<HomePage> {
                                                 fontSize: 14,
                                                 color: Colors.redAccent),
                                           ),
-                                          //SizedBox(height: 0,),
+                                          const SizedBox(height: 2,),
                                           //Sample chart
                                           SfCircularChart(
+                                            annotations: <CircularChartAnnotation>[
+                                              CircularChartAnnotation(
+                                                  height: '75%', // Setting height and width for the circular chart annotation
+                                                  width: '75%',
+                                                  widget: Container(
+                                                      child: PhysicalModel(
+                                                          child: Container(),
+                                                          shape: BoxShape.circle,
+                                                          elevation: 10,
+                                                          shadowColor: Colors.black,
+                                                          color: const Color.fromRGBO(230, 230, 230, 1)))),
+                                              // CircularChartAnnotation(
+                                              //     widget: Container(
+                                              //         child: const Text('62%',
+                                              //             style: TextStyle(
+                                              //                 color: Color.fromRGBO(0, 0, 0, 0.5),
+                                              //                 fontSize: 25))))
+                                            ],
                                             centerY: '50',
                                             tooltipBehavior: _tooltipBehavior,
                                             // legend: Legend(
@@ -258,6 +276,8 @@ class _HomePageState extends State<HomePage> {
                                                   dataLabelSettings:
                                                       const DataLabelSettings(
                                                           isVisible: true),
+                                                  radius: '100%',
+                                                  innerRadius: '35%',
                                                   enableTooltip: true)
                                             ],
                                           ),
@@ -529,7 +549,7 @@ class _HomePageState extends State<HomePage> {
                                           padding: const EdgeInsets.fromLTRB(
                                               10, 0, 0, 5),
                                           child: Text(
-                                              '${state.data.percent_of_wards_bed_used}% na occupy ni sya?'),
+                                              '${state.data.percent_of_wards_bed_used}% Occupied'),
                                         )
                                       ],
                                     )),
@@ -544,6 +564,24 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: SfCircularChart(
+                              annotations: <CircularChartAnnotation>[
+                                CircularChartAnnotation(
+                                    height: '80%', // Setting height and width for the circular chart annotation
+                                    width: '80%',
+                                    widget: Container(
+                                        child: PhysicalModel(
+                                            child: Container(),
+                                            shape: BoxShape.circle,
+                                            elevation: 10,
+                                            shadowColor: Colors.black,
+                                            color: const Color.fromRGBO(230, 230, 230, 1)))),
+                                // CircularChartAnnotation(
+                                //     widget: Container(
+                                //         child: const Text('62%',
+                                //             style: TextStyle(
+                                //                 color: Color.fromRGBO(0, 0, 0, 0.5),
+                                //                 fontSize: 25))))
+                              ],
                               title: ChartTitle(text: 'Bed Percentage'),
                               tooltipBehavior: _tooltipBehavior,
                               series: <CircularSeries>[
@@ -558,6 +596,8 @@ class _HomePageState extends State<HomePage> {
                                         data.total,
                                     dataLabelSettings: const DataLabelSettings(
                                         isVisible: true),
+                                    radius: '100%',
+                                    innerRadius: '40%',
                                     enableTooltip: true)
                               ],
                             ),

@@ -42,11 +42,10 @@ class _LoginPageState extends State<LoginForm> {
             return Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                       colors: [
-                    Colors.white,
-                    Colors.blue.shade200,
+                    Colors.blue.shade100,
                     Colors.white
                   ])),
               child: Form(
@@ -78,6 +77,8 @@ class _LoginPageState extends State<LoginForm> {
                               children: <Widget>[
                                 const Text(
                                   'Username',
+                                  style: TextStyle(
+                                    fontSize: 18, color: Color(0xFF757575)),
                                 ),
                                 const SizedBox(height: 10.0),
                                 Container(
@@ -122,6 +123,8 @@ class _LoginPageState extends State<LoginForm> {
                               children: <Widget>[
                                 const Text(
                                   'Password',
+                                  style: TextStyle(
+                                    fontSize: 18, color: Color(0xFF757575)),
                                 ),
                                 const SizedBox(height: 10.0),
                                 Container(
@@ -181,11 +184,11 @@ class _LoginPageState extends State<LoginForm> {
                             style: ElevatedButton.styleFrom(
                                 primary: Colors.blue,
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 140, vertical: 15),
-                                textStyle: const TextStyle(fontSize: 15)),
+                                    horizontal: 115, vertical: 15),
+                                textStyle: const TextStyle(fontSize: 18)),
                           ),
                           const SizedBox(
-                            height: 200,
+                            height: 30,
                           ),
                         ],
                       )),
