@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(
                             height: 20,
                           ),
+                          
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             //crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,6 +127,7 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     )),
                               ),
+                              
                               //No. of Patients per division
                               Card(
                                 elevation: 5,
@@ -153,40 +155,42 @@ class _HomePageState extends State<HomePage> {
                                                 color: Colors.blue,
                                                 fontWeight: FontWeight.bold),
                                           ),
+                                          const SizedBox(height: 5,),
                                           Text(
                                             'Cardiology: ${state.data.cardiology_patient_count}',
                                             style:
-                                                const TextStyle(fontSize: 12),
+                                                const TextStyle(fontSize: 14),
                                           ),
                                           Text(
                                             'Telemetry: ${state.data.telemetry_patient_count}',
                                             style:
-                                                const TextStyle(fontSize: 12),
+                                                const TextStyle(fontSize: 14),
                                           ),
                                           Text(
                                             'Oncology: ${state.data.oncology_patient_count}',
                                             style:
-                                                const TextStyle(fontSize: 12),
+                                                const TextStyle(fontSize: 14),
                                           ),
                                           Text(
                                             'Emergency: ${state.data.emergency_patient_count}',
                                             style:
-                                                const TextStyle(fontSize: 12),
+                                                const TextStyle(fontSize: 14),
                                           ),
                                           Text(
                                             'Orthopedic: ${state.data.orthopedic_patient_count}',
                                             style:
-                                                const TextStyle(fontSize: 12),
+                                                const TextStyle(fontSize: 14),
                                           ),
                                           Text(
                                             'Others: ${state.data.other_division_count}',
                                             style:
-                                                const TextStyle(fontSize: 12),
+                                                const TextStyle(fontSize: 14),
                                           )
                                         ],
                                       ),
                                     )),
                               ),
+                              
                             ],
                           ),
                           const SizedBox(
@@ -215,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: [
+                                        children:<Widget> [
                                           Text(
                                             state.data.num_of_total_covid_cases
                                                 .toString(),
@@ -228,9 +232,10 @@ class _HomePageState extends State<HomePage> {
                                                 fontSize: 14,
                                                 color: Colors.redAccent),
                                           ),
-                                          const SizedBox(height: 2,),
+                                          const SizedBox(height: 0,),
                                           //Sample chart
                                           SfCircularChart(
+                                            margin: const EdgeInsets.all(0),
                                             annotations: <CircularChartAnnotation>[
                                               CircularChartAnnotation(
                                                   height: '75%', // Setting height and width for the circular chart annotation
@@ -249,13 +254,16 @@ class _HomePageState extends State<HomePage> {
                                               //                 color: Color.fromRGBO(0, 0, 0, 0.5),
                                               //                 fontSize: 25))))
                                             ],
-                                            centerY: '50',
+                                            centerY: '90',
                                             tooltipBehavior: _tooltipBehavior,
-                                            // legend: Legend(
-                                            //   position: LegendPosition.bottom,
-                                            //   isVisible: true,
-                                            //   isResponsive:true,
-                                            //   overflowMode: LegendItemOverflowMode.wrap),
+                                            legend: Legend(
+                                              itemPadding: 5,
+                                              iconHeight: 15,
+                                              position: LegendPosition.bottom,
+                                              isVisible: true,
+                                              isResponsive:true,
+                                              overflowMode: LegendItemOverflowMode.wrap
+                                              ),
                                             series: <CircularSeries>[
                                               DoughnutSeries<WithCovid, String>(
                                                   dataSource: totalWithCovid(
@@ -327,22 +335,39 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: SfCartesianChart(
-                              title: ChartTitle(text: 'Title'),
-                              primaryXAxis: NumericAxis(
+                              title: ChartTitle(text: 'Covid and Non Covid Patients'),
+                              legend: Legend(
+                                position: LegendPosition.bottom,
+                                isResponsive: true,
+                                isVisible: true),
+                              primaryXAxis: CategoryAxis(
                                   // Edge labels will be shifted
                                   edgeLabelPlacement: EdgeLabelPlacement.shift,
                                   crossesAt: 0),
-                              primaryYAxis: NumericAxis(crossesAt: 0),
-                              series: <ChartSeries>[
-                                SplineSeries<TotalPatient, double>(
+                              primaryYAxis: CategoryAxis(crossesAt: 0,
+                                interval: 10,),
+                              series: <ChartSeries<TotalPatient, String>>[
+                                SplineSeries<TotalPatient, String>(
+                                    name: 'Non Covid Patient',
                                     dataSource: _chartData,
-                                    xValueMapper: (TotalPatient sales, _) =>
-                                        sales.year,
-                                    yValueMapper: (TotalPatient sales, _) =>
-                                        sales.sales,
+                                    xValueMapper: (TotalPatient patientData, _) =>
+                                        patientData.month,
+                                    yValueMapper: (TotalPatient patientData, _) =>
+                                        patientData.nonCovidPatient,
                                     // ignore: prefer_const_constructors
                                     markerSettings:
-                                        const MarkerSettings(isVisible: true))
+                                        const MarkerSettings(isVisible: true)),
+                                SplineSeries<TotalPatient, String>(
+                                  name: 'Covid Patient',
+                                    dataSource: _chartData,
+                                    xValueMapper: (TotalPatient patientData, _) =>
+                                        patientData.month,
+                                    yValueMapper: (TotalPatient patientData, _) =>
+                                        patientData.covidPatient,
+                                    // ignore: prefer_const_constructors
+                                    markerSettings:
+                                        const MarkerSettings(isVisible: true)),
+                                  
                               ],
                             ),
                           ),
@@ -584,6 +609,11 @@ class _HomePageState extends State<HomePage> {
                               ],
                               title: ChartTitle(text: 'Bed Percentage'),
                               tooltipBehavior: _tooltipBehavior,
+                              legend: Legend(
+                                position: LegendPosition.bottom,
+                                isVisible: true,
+                                isResponsive:true,
+                                overflowMode: LegendItemOverflowMode.wrap),
                               series: <CircularSeries>[
                                 DoughnutSeries<TotalBed, String>(
                                     dataSource: getTotalChart(
@@ -619,11 +649,11 @@ class _HomePageState extends State<HomePage> {
 
   List<TotalPatient> getChartData() {
     final List<TotalPatient> chartData = [
-      TotalPatient(2017, 25),
-      TotalPatient(2018, 12),
-      TotalPatient(2019, 24),
-      TotalPatient(2020, 18),
-      TotalPatient(2021, 30),
+      TotalPatient('January',40, 30),
+      TotalPatient('February', 60, 10),
+      TotalPatient('March', 24, 25),
+      TotalPatient('April', 18, 19),
+      TotalPatient('May', 30, 29),
     ];
     return chartData;
   }
@@ -659,9 +689,10 @@ class _HomePageState extends State<HomePage> {
 }
 
 class TotalPatient {
-  TotalPatient(this.year, this.sales);
-  final double year;
-  final double sales;
+  TotalPatient(this.month, this.covidPatient, this.nonCovidPatient);
+  final String month;
+  final double covidPatient;
+  final double nonCovidPatient;
 }
 
 class PatientGender {
