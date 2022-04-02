@@ -24,7 +24,9 @@ class DataApi extends Equatable {
       this.total_icu_bed,
       this.total_isolation_bed,
       this.total_wards_bed,
-      this.total_num_of_beds);
+      this.total_num_of_beds,
+      this.ob_er_patient_count,
+      this.ob_patient_count);
 
   final int id;
   final int num_of_current_patient;
@@ -49,6 +51,8 @@ class DataApi extends Equatable {
   final int total_isolation_bed;
   final int total_wards_bed;
   final int total_num_of_beds;
+  final int ob_er_patient_count;
+  final int ob_patient_count;
 
   @override
   List<Object> get props => [
@@ -76,8 +80,8 @@ class DataApi extends Equatable {
         total_num_of_beds
       ];
 
-  static const empty = DataApi(
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  static const empty = DataApi(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0);
 
   factory DataApi.fromJson(dynamic json) {
     return DataApi(
@@ -104,6 +108,8 @@ class DataApi extends Equatable {
       json['total_isolation_bed'],
       json['total_wards_bed'],
       json['total_num_of_beds'],
+      json['ob_er_patient_count'],
+      json['ob_patient_count'],
     );
   }
 }

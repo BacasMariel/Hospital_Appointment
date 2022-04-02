@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hospital_app/authentication/authentication.dart';
 import 'package:hospital_app/dashboard/bloc/dashboard_bloc.dart';
+import 'package:hospital_app/dashboard/view/utilities.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../frontpage/view/view.dart';
 import '../../screens/appointment.dart';
-import '../../screens/utilities.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(
                             height: 20,
                           ),
-                          
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             //crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     )),
                               ),
-                              
+
                               //No. of Patients per division
                               Card(
                                 elevation: 5,
@@ -155,7 +156,9 @@ class _HomePageState extends State<HomePage> {
                                                 color: Colors.blue,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          const SizedBox(height: 5,),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
                                           Text(
                                             'Cardiology: ${state.data.cardiology_patient_count}',
                                             style:
@@ -190,7 +193,6 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     )),
                               ),
-                              
                             ],
                           ),
                           const SizedBox(
@@ -219,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children:<Widget> [
+                                        children: <Widget>[
                                           Text(
                                             state.data.num_of_total_covid_cases
                                                 .toString(),
@@ -232,21 +234,29 @@ class _HomePageState extends State<HomePage> {
                                                 fontSize: 14,
                                                 color: Colors.redAccent),
                                           ),
-                                          const SizedBox(height: 0,),
+                                          const SizedBox(
+                                            height: 0,
+                                          ),
                                           //Sample chart
                                           SfCircularChart(
                                             margin: const EdgeInsets.all(0),
-                                            annotations: <CircularChartAnnotation>[
+                                            annotations: <
+                                                CircularChartAnnotation>[
                                               CircularChartAnnotation(
-                                                  height: '75%', // Setting height and width for the circular chart annotation
+                                                  height:
+                                                      '75%', // Setting height and width for the circular chart annotation
                                                   width: '75%',
                                                   widget: Container(
                                                       child: PhysicalModel(
                                                           child: Container(),
-                                                          shape: BoxShape.circle,
+                                                          shape:
+                                                              BoxShape.circle,
                                                           elevation: 10,
-                                                          shadowColor: Colors.black,
-                                                          color: const Color.fromRGBO(230, 230, 230, 1)))),
+                                                          shadowColor:
+                                                              Colors.black,
+                                                          color: const Color
+                                                                  .fromRGBO(230,
+                                                              230, 230, 1)))),
                                               // CircularChartAnnotation(
                                               //     widget: Container(
                                               //         child: const Text('62%',
@@ -257,13 +267,14 @@ class _HomePageState extends State<HomePage> {
                                             centerY: '90',
                                             tooltipBehavior: _tooltipBehavior,
                                             legend: Legend(
-                                              itemPadding: 5,
-                                              iconHeight: 15,
-                                              position: LegendPosition.bottom,
-                                              isVisible: true,
-                                              isResponsive:true,
-                                              overflowMode: LegendItemOverflowMode.wrap
-                                              ),
+                                                itemPadding: 5,
+                                                iconHeight: 15,
+                                                position: LegendPosition.bottom,
+                                                isVisible: true,
+                                                isResponsive: true,
+                                                overflowMode:
+                                                    LegendItemOverflowMode
+                                                        .wrap),
                                             series: <CircularSeries>[
                                               DoughnutSeries<WithCovid, String>(
                                                   dataSource: totalWithCovid(
@@ -335,39 +346,45 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: SfCartesianChart(
-                              title: ChartTitle(text: 'Covid and Non Covid Patients'),
+                              title: ChartTitle(
+                                  text: 'Covid and Non Covid Patients'),
                               legend: Legend(
-                                position: LegendPosition.bottom,
-                                isResponsive: true,
-                                isVisible: true),
+                                  position: LegendPosition.bottom,
+                                  isResponsive: true,
+                                  isVisible: true),
                               primaryXAxis: CategoryAxis(
                                   // Edge labels will be shifted
                                   edgeLabelPlacement: EdgeLabelPlacement.shift,
                                   crossesAt: 0),
-                              primaryYAxis: CategoryAxis(crossesAt: 0,
-                                interval: 10,),
+                              primaryYAxis: CategoryAxis(
+                                crossesAt: 0,
+                                interval: 10,
+                              ),
                               series: <ChartSeries<TotalPatient, String>>[
                                 SplineSeries<TotalPatient, String>(
                                     name: 'Non Covid Patient',
                                     dataSource: _chartData,
-                                    xValueMapper: (TotalPatient patientData, _) =>
-                                        patientData.month,
-                                    yValueMapper: (TotalPatient patientData, _) =>
-                                        patientData.nonCovidPatient,
+                                    xValueMapper:
+                                        (TotalPatient patientData, _) =>
+                                            patientData.month,
+                                    yValueMapper:
+                                        (TotalPatient patientData, _) =>
+                                            patientData.nonCovidPatient,
                                     // ignore: prefer_const_constructors
                                     markerSettings:
                                         const MarkerSettings(isVisible: true)),
                                 SplineSeries<TotalPatient, String>(
-                                  name: 'Covid Patient',
+                                    name: 'Covid Patient',
                                     dataSource: _chartData,
-                                    xValueMapper: (TotalPatient patientData, _) =>
-                                        patientData.month,
-                                    yValueMapper: (TotalPatient patientData, _) =>
-                                        patientData.covidPatient,
+                                    xValueMapper:
+                                        (TotalPatient patientData, _) =>
+                                            patientData.month,
+                                    yValueMapper:
+                                        (TotalPatient patientData, _) =>
+                                            patientData.covidPatient,
                                     // ignore: prefer_const_constructors
                                     markerSettings:
                                         const MarkerSettings(isVisible: true)),
-                                  
                               ],
                             ),
                           ),
@@ -591,7 +608,8 @@ class _HomePageState extends State<HomePage> {
                             child: SfCircularChart(
                               annotations: <CircularChartAnnotation>[
                                 CircularChartAnnotation(
-                                    height: '80%', // Setting height and width for the circular chart annotation
+                                    height:
+                                        '80%', // Setting height and width for the circular chart annotation
                                     width: '80%',
                                     widget: Container(
                                         child: PhysicalModel(
@@ -599,7 +617,8 @@ class _HomePageState extends State<HomePage> {
                                             shape: BoxShape.circle,
                                             elevation: 10,
                                             shadowColor: Colors.black,
-                                            color: const Color.fromRGBO(230, 230, 230, 1)))),
+                                            color: const Color.fromRGBO(
+                                                230, 230, 230, 1)))),
                                 // CircularChartAnnotation(
                                 //     widget: Container(
                                 //         child: const Text('62%',
@@ -610,10 +629,10 @@ class _HomePageState extends State<HomePage> {
                               title: ChartTitle(text: 'Bed Percentage'),
                               tooltipBehavior: _tooltipBehavior,
                               legend: Legend(
-                                position: LegendPosition.bottom,
-                                isVisible: true,
-                                isResponsive:true,
-                                overflowMode: LegendItemOverflowMode.wrap),
+                                  position: LegendPosition.bottom,
+                                  isVisible: true,
+                                  isResponsive: true,
+                                  overflowMode: LegendItemOverflowMode.wrap),
                               series: <CircularSeries>[
                                 DoughnutSeries<TotalBed, String>(
                                     dataSource: getTotalChart(
@@ -649,7 +668,7 @@ class _HomePageState extends State<HomePage> {
 
   List<TotalPatient> getChartData() {
     final List<TotalPatient> chartData = [
-      TotalPatient('January',40, 30),
+      TotalPatient('January', 40, 30),
       TotalPatient('February', 60, 10),
       TotalPatient('March', 24, 25),
       TotalPatient('April', 18, 19),
@@ -766,6 +785,11 @@ class _MenuState extends State<Menu> {
             CustomListTile(Icons.date_range_sharp, 'Appoinment', () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const Appointment()));
+            }),
+            CustomListTile(Icons.logout_sharp, 'Logout', () {
+              context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticateLogoutRequested());
             }),
           ],
         );
