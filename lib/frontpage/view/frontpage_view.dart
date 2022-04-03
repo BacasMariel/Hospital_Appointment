@@ -63,19 +63,19 @@ class _HomeState extends State<Home> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const Appointment()));
-                  },
-                  child: const Text('Set Appointment'),
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 15),
-                      textStyle: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold)),
-                ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     Navigator.of(context).push(MaterialPageRoute(
+                //         builder: (context) => const Appointment()));
+                //   },
+                //   child: const Text('Set Appointment'),
+                //   style: ElevatedButton.styleFrom(
+                //       primary: Colors.blue,
+                //       padding: const EdgeInsets.symmetric(
+                //           horizontal: 30, vertical: 15),
+                //       textStyle: const TextStyle(
+                //           fontSize: 15, fontWeight: FontWeight.bold)),
+                // ),
                 const SizedBox(
                   width: 20,
                 ),

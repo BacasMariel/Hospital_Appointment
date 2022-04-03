@@ -12,6 +12,8 @@ class DataApi extends Equatable {
       this.oncology_patient_count,
       this.emergency_patient_count,
       this.orthopedic_patient_count,
+      this.ob_patient_count,
+      this.ob_er_patient_count,
       this.other_division_count,
       this.num_of_new_covid_cases,
       this.num_of_active_cases,
@@ -36,6 +38,8 @@ class DataApi extends Equatable {
   final int oncology_patient_count;
   final int emergency_patient_count;
   final int orthopedic_patient_count;
+  final int ob_patient_count;
+  final int ob_er_patient_count;
   final int other_division_count;
   final int num_of_new_covid_cases;
   final int num_of_active_cases;
@@ -63,6 +67,8 @@ class DataApi extends Equatable {
         oncology_patient_count,
         emergency_patient_count,
         orthopedic_patient_count,
+        ob_patient_count,
+        ob_er_patient_count,
         num_of_new_covid_cases,
         num_of_active_cases,
         num_of_covid_recovery,
@@ -70,14 +76,15 @@ class DataApi extends Equatable {
         num_of_total_covid_cases,
         percent_of_icu_bed_used,
         percent_of_isolation_bed_used,
+        percent_of_wards_bed_used,
         total_icu_bed,
         total_isolation_bed,
         total_wards_bed,
-        total_num_of_beds
+        total_num_of_beds,
       ];
 
-  static const empty = DataApi(
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+  static const empty = DataApi(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0);
 
   factory DataApi.fromJson(dynamic json) {
     return DataApi(
@@ -91,6 +98,8 @@ class DataApi extends Equatable {
       json['oncology_patient_count'],
       json['emergency_patient_count'],
       json['orthopedic_patient_count'],
+      json['ob_patient_count'],
+      json['ob_er_patient_count'],
       json['other_division_count'],
       json['num_of_new_covid_cases'],
       json['num_of_active_cases'],
