@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../dashboard.dart';
+import '../model/model.dart';
 
 class Utility extends StatefulWidget {
   const Utility({Key? key}) : super(key: key);
@@ -48,26 +49,9 @@ class _UtilityState extends State<Utility> {
           selectedItemColor: Colors.blue[400],
           onTap: _onItemTapped,
         ),
-        body: BlocListener<DashboardBloc, DashboardState>(
-          listener: (context, state) {
-            if (state is DataError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message!),
-                ),
-              );
-            } else if (state is DataMessage) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message!),
-                ),
-              );
-            }
-          },
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: _widgetOptions.elementAt(_selectedIndex),
-          ),
+        body: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Center(child: _widgetOptions.elementAt(_selectedIndex)),
         ),
       ),
     );
@@ -92,22 +76,6 @@ class _PatientStatState extends State<PatientStat> {
   TextEditingController _controllerTelemetryPatient = TextEditingController();
   TextEditingController _controllerOncologyPatient = TextEditingController();
   TextEditingController _controllerOrthopedicPatient = TextEditingController();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _controllerTotalPatient.text =
-  //       "0"; // Setting the initial value for the field.
-  //   _controllerCovidPatient.text = "0";
-  //   _controllerNonCovidPatient.text = "0";
-  //   _controllerERPatient.text = "0";
-  //   _controllerOBERPatient.text = "0";
-  //   _controllerOBPatient.text = "0";
-  //   _controllerCardiologyPatient.text = "0";
-  //   _controllerTelemetryPatient.text = "0";
-  //   _controllerOncologyPatient.text = "0";
-  //   _controllerOrthopedicPatient.text = "0";
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -253,7 +221,12 @@ class _PatientStatState extends State<PatientStat> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil<void>(
+                            HomePage.route(),
+                            (route) => false,
+                          );
+                        },
                         child: const Text('Cancel'),
                         style: ElevatedButton.styleFrom(
                             primary: Colors.grey,
@@ -265,7 +238,36 @@ class _PatientStatState extends State<PatientStat> {
                         width: 20,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<DashboardBloc>().add(UpdateData(DataApi(
+                                state.data.id,
+                                state.data.num_of_current_patient,
+                                state.data.num_of_discharge,
+                                state.data.num_of_admits,
+                                (int.parse(_controllerCovidPatient.text) +
+                                    int.parse(_controllerNonCovidPatient.text)),
+                                int.parse(_controllerCardiologyPatient.text),
+                                state.data.other_division_count,
+                                int.parse(_controllerTelemetryPatient.text),
+                                int.parse(_controllerOncologyPatient.text),
+                                int.parse(_controllerERPatient.text),
+                                int.parse(_controllerOrthopedicPatient.text),
+                                int.parse(_controllerOBPatient.text),
+                                int.parse(_controllerOBERPatient.text),
+                                state.data.num_of_new_covid_cases,
+                                state.data.num_of_active_cases,
+                                state.data.num_of_covid_recovery,
+                                state.data.num_of_covid_deaths,
+                                int.parse(_controllerCovidPatient.text),
+                                state.data.percent_of_icu_bed_used,
+                                state.data.percent_of_isolation_bed_used,
+                                state.data.percent_of_wards_bed_used,
+                                state.data.total_icu_bed,
+                                state.data.total_isolation_bed,
+                                state.data.total_wards_bed,
+                                state.data.total_num_of_beds,
+                              )));
+                        },
                         child: const Text('Save'),
                         style: ElevatedButton.styleFrom(
                             primary: Colors.green,
@@ -397,7 +399,12 @@ class _OtherStatState extends State<OtherStat> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil<void>(
+                            HomePage.route(),
+                            (route) => false,
+                          );
+                        },
                         child: const Text('Cancel'),
                         style: ElevatedButton.styleFrom(
                             primary: Colors.grey,
@@ -409,7 +416,35 @@ class _OtherStatState extends State<OtherStat> {
                         width: 20,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<DashboardBloc>().add(UpdateData(DataApi(
+                                state.data.id,
+                                state.data.num_of_current_patient,
+                                state.data.num_of_discharge,
+                                state.data.num_of_admits,
+                                state.data.num_of_total_patient,
+                                state.data.cardiology_patient_count,
+                                state.data.other_division_count,
+                                state.data.telemetry_patient_count,
+                                state.data.oncology_patient_count,
+                                state.data.emergency_patient_count,
+                                state.data.orthopedic_patient_count,
+                                state.data.ob_patient_count,
+                                state.data.ob_er_patient_count,
+                                state.data.num_of_new_covid_cases,
+                                state.data.num_of_active_cases,
+                                state.data.num_of_covid_recovery,
+                                state.data.num_of_covid_deaths,
+                                state.data.num_of_total_covid_cases,
+                                state.data.percent_of_icu_bed_used,
+                                state.data.percent_of_isolation_bed_used,
+                                state.data.percent_of_wards_bed_used,
+                                int.parse(_controllerICUBed.text),
+                                int.parse(_controllerIsolationBed.text),
+                                int.parse(_controllerWardBed.text),
+                                int.parse(_controllerTotalBed.text),
+                              )));
+                        },
                         child: const Text('Save'),
                         style: ElevatedButton.styleFrom(
                             primary: Colors.green,
@@ -421,6 +456,8 @@ class _OtherStatState extends State<OtherStat> {
                   )
                 ],
               ));
+        } else if (state is DataMessage) {
+          return const Text('');
         } else {
           return const Text('Something is Wrong');
         }

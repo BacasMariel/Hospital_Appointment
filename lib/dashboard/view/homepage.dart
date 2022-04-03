@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, unnecessary_new, prefer_const_literals_to_create_immutables, unnecessary_const, avoid_unnecessary_containers
 
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hospital_app/authentication/authentication.dart';
@@ -9,6 +10,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../frontpage/view/view.dart';
+import '../../login/view/view.dart';
 import '../../screens/appointment.dart';
 
 class HomePage extends StatefulWidget {
@@ -779,13 +781,31 @@ class _MenuState extends State<Menu> {
               Navigator.of(context).pop();
             }),
             CustomListTile(Icons.build, 'Utilities', () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Utility()));
+              // switch (state.status) {
+              //   case AuthenticationStatus.authenticated:
+              //     Navigator.of(context).push<void>(
+              //       Utility.route(),
+              //     );
+              //     break;
+              //   case AuthenticationStatus.unauthenticated:
+              //     Navigator.of(context).push<void>(
+              //       LoginPage.route(),
+              //     );
+              //     break;
+              //   default:
+              //     break;
+              // }
+              Navigator.of(context).push<void>(
+                Utility.route(),
+              );
+
+              // Navigator.of(context).push(
+              //     MaterialPageRoute(builder: (context) => const Utility()));
             }),
-            CustomListTile(Icons.date_range_sharp, 'Appoinment', () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Appointment()));
-            }),
+            // CustomListTile(Icons.date_range_sharp, 'Appoinment', () {
+            //   Navigator.of(context).push(
+            //       MaterialPageRoute(builder: (context) => const Appointment()));
+            // }),
             CustomListTile(Icons.logout_sharp, 'Logout', () {
               context
                   .read<AuthenticationBloc>()
