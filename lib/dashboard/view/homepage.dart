@@ -795,9 +795,21 @@ class _MenuState extends State<Menu> {
               //   default:
               //     break;
               // }
-              Navigator.of(context).push<void>(
-                Utility.route(),
-              );
+
+              if (state.user.type == 'administration') {
+                Navigator.of(context).push<void>(
+                  Utility.route(),
+                );
+              } else {
+                Navigator.of(context).push<void>(
+                  HomePage.route(),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('You are Unauthorized'),
+                  ),
+                );
+              }
 
               // Navigator.of(context).push(
               //     MaterialPageRoute(builder: (context) => const Utility()));
