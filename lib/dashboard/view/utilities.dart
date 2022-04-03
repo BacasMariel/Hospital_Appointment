@@ -279,6 +279,8 @@ class _PatientStatState extends State<PatientStat> {
                   )
                 ],
               ));
+        } else if (state is DataMessage) {
+          return const Text('');
         } else {
           return const Text('Something is Wrong');
         }
