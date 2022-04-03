@@ -116,11 +116,69 @@ class _PatientStatState extends State<PatientStat> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
 //=================================TOTAL NUMBER OF PATIENTS============================================================================================================
-                              CustomTextFormField(
-                                  'Total Number of Patients',
-                                  _controllerTotalPatient
-                                    ..text = state.data.num_of_total_patient
-                                        .toString()),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  const Text('Total Number of Patients'),
+                                  const SizedBox(height: 10.0),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      height: 65,
+                                      //margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(17),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 3,
+                                            blurRadius: 7,
+                                            offset: const Offset(0,
+                                                4), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 0, 0, 0),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: TextFormField(
+                                                enabled: false,
+                                                controller:
+                                                    _controllerTotalPatient
+                                                      ..text = state.data
+                                                          .num_of_total_patient
+                                                          .toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 18),
+                                                decoration:
+                                                    const InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintText: 'value',
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 10.0),
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                inputFormatters: <
+                                                    TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly
+                                                ], // Only numbers can be entered
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
 //==============================WITH COVID=======================================================
                               const SizedBox(
                                 height: 15,
@@ -349,11 +407,68 @@ class _OtherStatState extends State<OtherStat> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
 //===========================TOTAL NUMBER OF BEDS=================================
-                              CustomTextFormField(
-                                  'Total Number of Beds',
-                                  _controllerTotalBed
-                                    ..text = state.data.total_num_of_beds
-                                        .toString()),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  const Text('Total Number of Beds'),
+                                  const SizedBox(height: 10.0),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      height: 65,
+                                      //margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(17),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 3,
+                                            blurRadius: 7,
+                                            offset: const Offset(0,
+                                                4), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 0, 0, 0),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: TextFormField(
+                                                enabled: false,
+                                                controller: _controllerTotalBed
+                                                  ..text = state
+                                                      .data.total_num_of_beds
+                                                      .toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 18),
+                                                decoration:
+                                                    const InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintText: 'value',
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 10.0),
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                inputFormatters: <
+                                                    TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly
+                                                ], // Only numbers can be entered
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
 //==============================ICU BEDS=======================================================
                               const SizedBox(
                                 height: 15,
