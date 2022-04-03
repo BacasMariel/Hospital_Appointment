@@ -72,7 +72,8 @@ class _PatientStatState extends State<PatientStat> {
   @override
   void initState() {
     super.initState();
-    _controllerTotalPatient.text = "0"; // Setting the initial value for the field.
+    _controllerTotalPatient.text =
+        "0"; // Setting the initial value for the field.
     _controllerCovidPatient.text = "0";
     _controllerNonCovidPatient.text = "0";
     _controllerERPatient.text = "0";
@@ -115,38 +116,94 @@ class _PatientStatState extends State<PatientStat> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
 //=================================TOTAL NUMBER OF PATIENTS============================================================================================================
-                        CustomTextFormField('Total Number of Patients',_controllerTotalPatient),
-//==============================WITH COVID=======================================================
+                        // CustomTextFormField('Total Number of Patients',
+                        //     _controllerTotalPatient),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const Text('Total Number of Patients'),
+                            const SizedBox(height: 10.0),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 65,
+                                //margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(17),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: const Offset(
+                                          0, 4), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: TextFormField(
+                                          enabled: false,
+                                          controller: _controllerTotalPatient,
+                                          style: const TextStyle(fontSize: 18),
+                                          decoration: const InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'value',
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 10.0),
+                                          ),
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ], // Only numbers can be entered
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomTextFormField('Number of Patients with Covid',
+                            _controllerCovidPatient),
+
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomTextFormField('Number of Patients without Covid',
+                            _controllerNonCovidPatient),
+
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomTextFormField(
+                            'Number of Patients in ER', _controllerERPatient),
+
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomTextFormField('Number of Patients in OB-ER',
+                            _controllerOBERPatient),
+
                         const SizedBox(
                           height: 15,
                         ),
 
-                        CustomTextFormField('Number of Patients with Covid',_controllerCovidPatient),
-//==============================WITHOUT COVID=======================================================
-
-                        const SizedBox(
-                          height: 15,
-                        ),
-
-                        CustomTextFormField('Number of Patients without Covid',_controllerNonCovidPatient),
-//==============================IN ER=======================================================
-                        const SizedBox(
-                          height: 15,
-                        ),
-
-                        CustomTextFormField('Number of Patients in ER',_controllerERPatient),
-//==============================OB-ER====================================================
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        CustomTextFormField('Number of Patients in OB-ER',_controllerOBERPatient),
-
-//===============================OB=====================================================
-                        const SizedBox(
-                          height: 15,
-                        ),
-
-                        CustomTextFormField('Number of Patients in OB',_controllerOBPatient),
+                        CustomTextFormField(
+                            'Number of Patients in OB', _controllerOBPatient),
                         const SizedBox(
                           height: 10,
                         ),
@@ -159,15 +216,17 @@ class _PatientStatState extends State<PatientStat> {
                           height: 10,
                         ),
 
-                        CustomTextFormField('Cardiology Patients',_controllerCardiologyPatient),
-                        CustomTextFormField('Telemetry Patients',_controllerTelemetryPatient),
-                        CustomTextFormField('Oncology Patients',_controllerOncologyPatient),
-                        CustomTextFormField('Orthopedic Patients',_controllerOrthopedicPatient),
+                        CustomTextFormField('Cardiology Patients',
+                            _controllerCardiologyPatient),
+                        CustomTextFormField(
+                            'Telemetry Patients', _controllerTelemetryPatient),
+                        CustomTextFormField(
+                            'Oncology Patients', _controllerOncologyPatient),
+                        CustomTextFormField('Orthopedic Patients',
+                            _controllerOrthopedicPatient),
                         const SizedBox(
                           height: 10,
                         ),
-
-//===================================BUTTONS========================================================
                       ]),
                 ),
               ),
@@ -175,6 +234,7 @@ class _PatientStatState extends State<PatientStat> {
             const SizedBox(
               height: 10,
             ),
+//===================================BUTTONS========================================================
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -192,7 +252,7 @@ class _PatientStatState extends State<PatientStat> {
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Text('Save'),
+                  child: const Text('Update'),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       padding: const EdgeInsets.symmetric(
@@ -258,28 +318,81 @@ class _OtherStatState extends State<OtherStat> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
 //===========================TOTAL NUMBER OF BEDS=================================
-                        CustomTextFormField('Total Number of Beds',_controllerTotalBed),
-//==============================ICU BEDS=======================================================
+                        //CustomTextFormField('Total Number of Beds',_controllerTotalBed),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const Text('Total Number of Beds'),
+                            const SizedBox(height: 10.0),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 65,
+                                //margin: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(17),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: const Offset(
+                                          0, 4), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: TextFormField(
+                                          enabled: false,
+                                          controller: _controllerTotalBed,
+                                          style: const TextStyle(fontSize: 18),
+                                          decoration: const InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'value',
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 10.0),
+                                          ),
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ], // Only numbers can be entered
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
                         const SizedBox(
                           height: 15,
                         ),
-
-                        CustomTextFormField('Total Number of ICU Beds',_controllerICUBed),
-//====================================ISOLATION BEDS=======================================================
-
-                        const SizedBox(
-                          height: 15,
-                        ),
-
-                        CustomTextFormField('Total Number of Isolation Beds',_controllerIsolationBed),
-//====================================WARD BEDS=======================================================
+                        CustomTextFormField(
+                            'Total Number of ICU Beds', _controllerICUBed),
 
                         const SizedBox(
                           height: 15,
                         ),
+                        CustomTextFormField('Total Number of Isolation Beds',
+                            _controllerIsolationBed),
 
-                        CustomTextFormField('Total Number of Ward Beds',_controllerWardBed),
-//===================================BUTTONS========================================================
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        CustomTextFormField(
+                            'Total Number of Ward Beds', _controllerWardBed),
+
                         const SizedBox(
                           height: 10,
                         ),
@@ -290,6 +403,7 @@ class _OtherStatState extends State<OtherStat> {
             const SizedBox(
               height: 10,
             ),
+//===================================BUTTONS========================================================
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -307,7 +421,7 @@ class _OtherStatState extends State<OtherStat> {
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Text('Save'),
+                  child: const Text('Update'),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       padding: const EdgeInsets.symmetric(
@@ -324,8 +438,7 @@ class _OtherStatState extends State<OtherStat> {
 class CustomTextFormField extends StatefulWidget {
   String text;
   TextEditingController _controllers;
-  CustomTextFormField(
-      this.text, this._controllers);
+  CustomTextFormField(this.text, this._controllers);
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -369,7 +482,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       style: const TextStyle(fontSize: 18),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: '84',
+                        //hintText: 'value',
                         contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
                       ),
                       keyboardType: TextInputType.number,
