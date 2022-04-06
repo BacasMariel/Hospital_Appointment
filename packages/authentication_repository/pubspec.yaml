@@ -8,3 +8,6 @@ environment:
 dependencies:
   http: ^0.13.4
   shared_preferences: ^2.0.13
+  sqflite: ^2.0.2
+  path: ^1.8.0
+  equatable: ^2.0.0

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:hospital_app/dashboard/model/model.dart';
 
@@ -34,12 +35,16 @@ class DataRepository {
       } else {
         throw Exception('Failed to load data');
       }
+    } on SocketException {
+      print('error soscket get');
+      return DataApi.empty;
     } catch (e) {
+      print(e.toString());
       return null;
     }
   }
 
-  Future<String> updateData(
+  Future<String?> updateData(
       int id,
       int num_of_current_patient,
       int num_of_discharge,
@@ -116,9 +121,12 @@ class DataRepository {
         print(response.statusCode);
         throw Exception(response.statusCode.toString());
       }
+    } on SocketException {
+      print('error soscket update');
+      return null;
     } catch (e) {
       print(e.toString());
-      return Future.error(e).toString();
+      return null;
     }
   }
 }

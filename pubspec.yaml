@@ -48,6 +48,8 @@ dependencies:
   charts_flutter: ^0.12.0
   syncfusion_flutter_charts: ^19.4.56
   percent_indicator: ^4.0.0
+  sqflite: ^2.0.2
+  path: ^1.8.0
 
 dev_dependencies:
   flutter_test:

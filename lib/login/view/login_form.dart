@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginForm> {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('Username or Password is Wrong')),
+              SnackBar(content: Text(state.message.toString())),
             );
         }
       },
@@ -44,10 +44,7 @@ class _LoginPageState extends State<LoginForm> {
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [
-                    Colors.blue.shade100,
-                    Colors.white
-                  ])),
+                      colors: [Colors.blue.shade100, Colors.white])),
               child: Form(
                 key: _formKey,
                 child: SingleChildScrollView(
@@ -78,7 +75,7 @@ class _LoginPageState extends State<LoginForm> {
                                 const Text(
                                   'Username',
                                   style: TextStyle(
-                                    fontSize: 18, color: Color(0xFF757575)),
+                                      fontSize: 18, color: Color(0xFF757575)),
                                 ),
                                 const SizedBox(height: 10.0),
                                 Container(
@@ -124,7 +121,7 @@ class _LoginPageState extends State<LoginForm> {
                                 const Text(
                                   'Password',
                                   style: TextStyle(
-                                    fontSize: 18, color: Color(0xFF757575)),
+                                      fontSize: 18, color: Color(0xFF757575)),
                                 ),
                                 const SizedBox(height: 10.0),
                                 Container(
