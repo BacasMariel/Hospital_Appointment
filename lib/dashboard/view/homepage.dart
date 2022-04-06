@@ -75,380 +75,267 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
                 if (state is DataLoaded) {
-                  return SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                            Colors.white,
-                            Colors.blue.shade200,
-                            Colors.blue,
-                            Colors.white
-                          ])),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
+                  return RefreshIndicator(
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [
+                              Colors.white,
+                              Colors.blue.shade200,
+                              Colors.blue,
+                              Colors.white
+                            ])),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            //crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              //TOTAL NO. OF PATIENTS
-                              Card(
-                                elevation: 5,
-                                //margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                    height: 190,
-                                    width: 140,
-                                    margin: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          state.data.num_of_total_patient
-                                              .toString(),
-                                          style: const TextStyle(fontSize: 32),
-                                        ),
-                                        const Text(
-                                          'Total Number of Patients',
-                                          style: TextStyle(
-                                              fontSize: 14, color: Colors.blue),
-                                        )
-                                      ],
-                                    )),
-                              ),
-
-                              //No. of Patients per division
-                              Card(
-                                elevation: 5,
-                                //margin: const EdgeInsets.fromLTRB(10, 20, 35, 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                    height: 190,
-                                    width: 140,
-                                    margin: const EdgeInsets.all(10),
-                                    child: SingleChildScrollView(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              //crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                //TOTAL NO. OF PATIENTS
+                                Card(
+                                  elevation: 5,
+                                  //margin: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                      height: 190,
+                                      width: 140,
+                                      margin: const EdgeInsets.all(10),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            'Number of Patients per Division',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.blue,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
                                           Text(
-                                            'Cardiology: ${state.data.cardiology_patient_count}',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
-                                          Text(
-                                            'Telemetry: ${state.data.telemetry_patient_count}',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
-                                          Text(
-                                            'Oncology: ${state.data.oncology_patient_count}',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
-                                          Text(
-                                            'Emergency: ${state.data.emergency_patient_count}',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
-                                          Text(
-                                            'Orthopedic: ${state.data.orthopedic_patient_count}',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
-                                          Text(
-                                            'OB: ${state.data.ob_patient_count}',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
-                                          Text(
-                                            'OB-ER: ${state.data.ob_er_patient_count}',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
-                                          Text(
-                                            'Others: ${state.data.other_division_count}',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 0,
-                          ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              //TOTAL NO OF PATIENTS WITH COVID
-                              Card(
-                                elevation: 5,
-                                //margin: const EdgeInsets.fromLTRB(10, 10, 0, 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                    height: 190,
-                                    width: 140,
-                                    margin: const EdgeInsets.all(10),
-                                    child: SingleChildScrollView(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            state.data.num_of_total_covid_cases
+                                            state.data.num_of_total_patient
                                                 .toString(),
                                             style:
                                                 const TextStyle(fontSize: 32),
                                           ),
                                           const Text(
-                                            'Total Number of Patients with Covid',
+                                            'Total Number of Patients',
                                             style: TextStyle(
                                                 fontSize: 14,
-                                                color: Colors.redAccent),
-                                          ),
-                                          const SizedBox(
-                                            height: 0,
-                                          ),
-                                          //Sample chart
-                                          SfCircularChart(
-                                            margin: const EdgeInsets.all(0),
-                                            annotations: <
-                                                CircularChartAnnotation>[
-                                              CircularChartAnnotation(
-                                                  height:
-                                                      '75%', // Setting height and width for the circular chart annotation
-                                                  width: '75%',
-                                                  widget: Container(
-                                                      child: PhysicalModel(
-                                                          child: Container(),
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          elevation: 10,
-                                                          shadowColor:
-                                                              Colors.black,
-                                                          color: const Color
-                                                                  .fromRGBO(230,
-                                                              230, 230, 1)))),
-                                              // CircularChartAnnotation(
-                                              //     widget: Container(
-                                              //         child: const Text('62%',
-                                              //             style: TextStyle(
-                                              //                 color: Color.fromRGBO(0, 0, 0, 0.5),
-                                              //                 fontSize: 25))))
-                                            ],
-                                            centerY: '90',
-                                            tooltipBehavior: _tooltipBehavior,
-                                            legend: Legend(
-                                                itemPadding: 5,
-                                                iconHeight: 15,
-                                                position: LegendPosition.bottom,
-                                                isVisible: true,
-                                                isResponsive: true,
-                                                overflowMode:
-                                                    LegendItemOverflowMode
-                                                        .wrap),
-                                            series: <CircularSeries>[
-                                              DoughnutSeries<WithCovid, String>(
-                                                  dataSource: totalWithCovid(
-                                                      state.data
-                                                          .num_of_covid_deaths,
-                                                      state.data
-                                                          .num_of_covid_recovery,
-                                                      state.data
-                                                          .num_of_active_cases,
-                                                      state.data
-                                                          .num_of_new_covid_cases),
-                                                  xValueMapper:
-                                                      (WithCovid data, _) =>
-                                                          data.description,
-                                                  yValueMapper:
-                                                      (WithCovid data, _) =>
-                                                          data.cases,
-                                                  dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          isVisible: true),
-                                                  radius: '100%',
-                                                  innerRadius: '35%',
-                                                  enableTooltip: true)
-                                            ],
-                                          ),
+                                                color: Colors.blue),
+                                          )
                                         ],
-                                      ),
-                                    )),
-                              ),
-                              //TOTAL NO OF PATIENTS WITHOUT COVID
-                              Card(
-                                elevation: 5,
-                                //margin: const EdgeInsets.fromLTRB(10, 10, 40, 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+                                      )),
                                 ),
-                                child: Container(
-                                    height: 190,
-                                    width: 140,
-                                    margin: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          (state.data.num_of_total_patient -
-                                                  state.data
-                                                      .num_of_total_covid_cases)
-                                              .toString(),
-                                          style: const TextStyle(fontSize: 32),
-                                        ),
-                                        const Text(
-                                          'Total Number of Patients without Covid',
-                                          style: TextStyle(
-                                              fontSize: 14, color: Colors.blue),
-                                        )
-                                      ],
-                                    )),
-                              ),
-                            ],
-                          ),
 
-                          //Graph
-                          Card(
-                            margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: SfCartesianChart(
-                              title: ChartTitle(
-                                  text: 'Covid and Non Covid Patients'),
-                              legend: Legend(
-                                  position: LegendPosition.bottom,
-                                  isResponsive: true,
-                                  isVisible: true),
-                              primaryXAxis: CategoryAxis(
-                                  // Edge labels will be shifted
-                                  edgeLabelPlacement: EdgeLabelPlacement.shift,
-                                  crossesAt: 0),
-                              primaryYAxis: CategoryAxis(
-                                crossesAt: 0,
-                                interval: 10,
-                              ),
-                              series: <ChartSeries<TotalPatient, String>>[
-                                SplineSeries<TotalPatient, String>(
-                                    name: 'Non Covid Patient',
-                                    dataSource: _chartData,
-                                    xValueMapper:
-                                        (TotalPatient patientData, _) =>
-                                            patientData.month,
-                                    yValueMapper:
-                                        (TotalPatient patientData, _) =>
-                                            patientData.nonCovidPatient,
-                                    // ignore: prefer_const_constructors
-                                    markerSettings:
-                                        const MarkerSettings(isVisible: true)),
-                                SplineSeries<TotalPatient, String>(
-                                    name: 'Covid Patient',
-                                    dataSource: _chartData,
-                                    xValueMapper:
-                                        (TotalPatient patientData, _) =>
-                                            patientData.month,
-                                    yValueMapper:
-                                        (TotalPatient patientData, _) =>
-                                            patientData.covidPatient,
-                                    // ignore: prefer_const_constructors
-                                    markerSettings:
-                                        const MarkerSettings(isVisible: true)),
+                                //No. of Patients per division
+                                Card(
+                                  elevation: 5,
+                                  //margin: const EdgeInsets.fromLTRB(10, 20, 35, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                      height: 190,
+                                      width: 140,
+                                      margin: const EdgeInsets.all(10),
+                                      child: SingleChildScrollView(
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              'Number of Patients per Division',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.blue,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              'Cardiology: ${state.data.cardiology_patient_count}',
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            ),
+                                            Text(
+                                              'Telemetry: ${state.data.telemetry_patient_count}',
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            ),
+                                            Text(
+                                              'Oncology: ${state.data.oncology_patient_count}',
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            ),
+                                            Text(
+                                              'Emergency: ${state.data.emergency_patient_count}',
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            ),
+                                            Text(
+                                              'Orthopedic: ${state.data.orthopedic_patient_count}',
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            ),
+                                            Text(
+                                              'OB: ${state.data.ob_patient_count}',
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            ),
+                                            Text(
+                                              'OB-ER: ${state.data.ob_er_patient_count}',
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            ),
+                                            Text(
+                                              'Others: ${state.data.other_division_count}',
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                ),
                               ],
                             ),
-                          ),
+                            const SizedBox(
+                              height: 0,
+                            ),
 
-                          //Total Number of Beds
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Card(
-                                elevation: 5,
-                                //margin: const EdgeInsets.fromLTRB(20, 10, 10, 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                    height: 120,
-                                    width: 150,
-                                    margin: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          state.data.total_num_of_beds
-                                              .toString(),
-                                          style: const TextStyle(fontSize: 32),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                //TOTAL NO OF PATIENTS WITH COVID
+                                Card(
+                                  elevation: 5,
+                                  //margin: const EdgeInsets.fromLTRB(10, 10, 0, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                      height: 190,
+                                      width: 140,
+                                      margin: const EdgeInsets.all(10),
+                                      child: SingleChildScrollView(
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              state
+                                                  .data.num_of_total_covid_cases
+                                                  .toString(),
+                                              style:
+                                                  const TextStyle(fontSize: 32),
+                                            ),
+                                            const Text(
+                                              'Total Number of Patients with Covid',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.redAccent),
+                                            ),
+                                            const SizedBox(
+                                              height: 0,
+                                            ),
+                                            //Sample chart
+                                            SfCircularChart(
+                                              margin: const EdgeInsets.all(0),
+                                              annotations: <
+                                                  CircularChartAnnotation>[
+                                                CircularChartAnnotation(
+                                                    height:
+                                                        '75%', // Setting height and width for the circular chart annotation
+                                                    width: '75%',
+                                                    widget: Container(
+                                                        child: PhysicalModel(
+                                                            child: Container(),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            elevation: 10,
+                                                            shadowColor:
+                                                                Colors.black,
+                                                            color: const Color
+                                                                    .fromRGBO(
+                                                                230,
+                                                                230,
+                                                                230,
+                                                                1)))),
+                                                // CircularChartAnnotation(
+                                                //     widget: Container(
+                                                //         child: const Text('62%',
+                                                //             style: TextStyle(
+                                                //                 color: Color.fromRGBO(0, 0, 0, 0.5),
+                                                //                 fontSize: 25))))
+                                              ],
+                                              centerY: '90',
+                                              tooltipBehavior: _tooltipBehavior,
+                                              legend: Legend(
+                                                  itemPadding: 5,
+                                                  iconHeight: 15,
+                                                  position:
+                                                      LegendPosition.bottom,
+                                                  isVisible: true,
+                                                  isResponsive: true,
+                                                  overflowMode:
+                                                      LegendItemOverflowMode
+                                                          .wrap),
+                                              series: <CircularSeries>[
+                                                DoughnutSeries<WithCovid,
+                                                        String>(
+                                                    dataSource: totalWithCovid(
+                                                        state.data
+                                                            .num_of_covid_deaths,
+                                                        state.data
+                                                            .num_of_covid_recovery,
+                                                        state.data
+                                                            .num_of_active_cases,
+                                                        state.data
+                                                            .num_of_new_covid_cases),
+                                                    xValueMapper:
+                                                        (WithCovid data, _) =>
+                                                            data.description,
+                                                    yValueMapper:
+                                                        (WithCovid data, _) =>
+                                                            data.cases,
+                                                    dataLabelSettings:
+                                                        const DataLabelSettings(
+                                                            isVisible: true),
+                                                    radius: '100%',
+                                                    innerRadius: '35%',
+                                                    enableTooltip: true)
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        const Text(
-                                          'Total Number of Beds',
-                                          style: TextStyle(
-                                              fontSize: 14, color: Colors.blue),
-                                        ),
-                                      ],
-                                    )),
-                              ),
-
-                              //Total Number of ICU beds
-                              Card(
-                                elevation: 5,
-                                //margin: const EdgeInsets.fromLTRB(20, 10, 10, 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+                                      )),
                                 ),
-                                child: Container(
-                                    height: 120,
-                                    width: 150,
-                                    margin: const EdgeInsets.all(10),
-                                    child: SingleChildScrollView(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(),
+                                //TOTAL NO OF PATIENTS WITHOUT COVID
+                                Card(
+                                  elevation: 5,
+                                  //margin: const EdgeInsets.fromLTRB(10, 10, 40, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                      height: 190,
+                                      width: 140,
+                                      margin: const EdgeInsets.all(10),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -456,12 +343,263 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            state.data.total_icu_bed.toString(),
+                                            (state.data.num_of_total_patient -
+                                                    state.data
+                                                        .num_of_total_covid_cases)
+                                                .toString(),
                                             style:
                                                 const TextStyle(fontSize: 32),
                                           ),
                                           const Text(
-                                            'Total Number of ICU beds',
+                                            'Total Number of Patients without Covid',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.blue),
+                                          )
+                                        ],
+                                      )),
+                                ),
+                              ],
+                            ),
+
+                            //Graph
+                            Card(
+                              margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: SfCartesianChart(
+                                title: ChartTitle(
+                                    text: 'Covid and Non Covid Patients'),
+                                legend: Legend(
+                                    position: LegendPosition.bottom,
+                                    isResponsive: true,
+                                    isVisible: true),
+                                primaryXAxis: CategoryAxis(
+                                    // Edge labels will be shifted
+                                    edgeLabelPlacement:
+                                        EdgeLabelPlacement.shift,
+                                    crossesAt: 0),
+                                primaryYAxis: CategoryAxis(
+                                  crossesAt: 0,
+                                  interval: 10,
+                                ),
+                                series: <ChartSeries<TotalPatient, String>>[
+                                  SplineSeries<TotalPatient, String>(
+                                      name: 'Non Covid Patient',
+                                      dataSource: _chartData,
+                                      xValueMapper:
+                                          (TotalPatient patientData, _) =>
+                                              patientData.month,
+                                      yValueMapper:
+                                          (TotalPatient patientData, _) =>
+                                              patientData.nonCovidPatient,
+                                      // ignore: prefer_const_constructors
+                                      markerSettings: const MarkerSettings(
+                                          isVisible: true)),
+                                  SplineSeries<TotalPatient, String>(
+                                      name: 'Covid Patient',
+                                      dataSource: _chartData,
+                                      xValueMapper:
+                                          (TotalPatient patientData, _) =>
+                                              patientData.month,
+                                      yValueMapper:
+                                          (TotalPatient patientData, _) =>
+                                              patientData.covidPatient,
+                                      // ignore: prefer_const_constructors
+                                      markerSettings: const MarkerSettings(
+                                          isVisible: true)),
+                                ],
+                              ),
+                            ),
+
+                            //Total Number of Beds
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Card(
+                                  elevation: 5,
+                                  //margin: const EdgeInsets.fromLTRB(20, 10, 10, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                      height: 120,
+                                      width: 150,
+                                      margin: const EdgeInsets.all(10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            state.data.total_num_of_beds
+                                                .toString(),
+                                            style:
+                                                const TextStyle(fontSize: 32),
+                                          ),
+                                          const Text(
+                                            'Total Number of Beds',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.blue),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+
+                                //Total Number of ICU beds
+                                Card(
+                                  elevation: 5,
+                                  //margin: const EdgeInsets.fromLTRB(20, 10, 10, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                      height: 120,
+                                      width: 150,
+                                      margin: const EdgeInsets.all(10),
+                                      child: SingleChildScrollView(
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              state.data.total_icu_bed
+                                                  .toString(),
+                                              style:
+                                                  const TextStyle(fontSize: 32),
+                                            ),
+                                            const Text(
+                                              'Total Number of ICU beds',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.blue),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            LinearPercentIndicator(
+                                              animation: true,
+                                              animationDuration: 1000,
+                                              lineHeight: 10,
+                                              percent: (0.01 *
+                                                  state.data
+                                                      .percent_of_icu_bed_used),
+                                              barRadius:
+                                                  const Radius.circular(10),
+                                              progressColor: Colors.blue,
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      10, 0, 0, 5),
+                                              child: Text(
+                                                  '${state.data.percent_of_icu_bed_used}% occupied'),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 0,
+                            ),
+
+                            //Total Number of Isolation Beds
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Card(
+                                  elevation: 5,
+                                  //margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                      height: 130,
+                                      width: 150,
+                                      margin: const EdgeInsets.all(10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          // ignore: prefer_const_constructors
+                                          Text(
+                                            state.data.total_isolation_bed
+                                                .toString(),
+                                            style:
+                                                const TextStyle(fontSize: 32),
+                                          ),
+                                          const Text(
+                                            'Total Number of Isolation Beds',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.redAccent),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          LinearPercentIndicator(
+                                            animation: true,
+                                            animationDuration: 1000,
+                                            lineHeight: 10,
+                                            percent: (0.01 *
+                                                state.data
+                                                    .percent_of_isolation_bed_used),
+                                            barRadius:
+                                                const Radius.circular(10),
+                                            progressColor: Colors.red,
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 0, 5),
+                                            child: Text(
+                                                '${state.data.percent_of_isolation_bed_used}% Occupied'),
+                                          )
+                                        ],
+                                      )),
+                                ),
+
+                                //Total Number of Ward Beds
+                                Card(
+                                  elevation: 5,
+                                  //margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Container(
+                                      height: 130,
+                                      width: 150,
+                                      margin: const EdgeInsets.all(10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            state.data.total_wards_bed
+                                                .toString(),
+                                            style:
+                                                const TextStyle(fontSize: 32),
+                                          ),
+                                          const Text(
+                                            'Total Number of Ward Beds',
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.blue),
@@ -475,10 +613,10 @@ class _HomePageState extends State<HomePage> {
                                             lineHeight: 10,
                                             percent: (0.01 *
                                                 state.data
-                                                    .percent_of_icu_bed_used),
+                                                    .percent_of_wards_bed_used),
                                             barRadius:
                                                 const Radius.circular(10),
-                                            progressColor: Colors.blue,
+                                            progressColor: Colors.green,
                                           ),
                                           const SizedBox(
                                             height: 10,
@@ -487,185 +625,74 @@ class _HomePageState extends State<HomePage> {
                                             padding: const EdgeInsets.fromLTRB(
                                                 10, 0, 0, 5),
                                             child: Text(
-                                                '${state.data.percent_of_icu_bed_used}% occupied'),
+                                                '${state.data.percent_of_wards_bed_used}% Occupied'),
                                           )
                                         ],
-                                      ),
-                                    )),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 0,
-                          ),
-
-                          //Total Number of Isolation Beds
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Card(
-                                elevation: 5,
-                                //margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+                                      )),
                                 ),
-                                child: Container(
-                                    height: 130,
-                                    width: 150,
-                                    margin: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        // ignore: prefer_const_constructors
-                                        Text(
-                                          state.data.total_isolation_bed
-                                              .toString(),
-                                          style: const TextStyle(fontSize: 32),
-                                        ),
-                                        const Text(
-                                          'Total Number of Isolation Beds',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.redAccent),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        LinearPercentIndicator(
-                                          animation: true,
-                                          animationDuration: 1000,
-                                          lineHeight: 10,
-                                          percent: (0.01 *
-                                              state.data
-                                                  .percent_of_isolation_bed_used),
-                                          barRadius: const Radius.circular(10),
-                                          progressColor: Colors.red,
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              10, 0, 0, 5),
-                                          child: Text(
-                                              '${state.data.percent_of_isolation_bed_used}% Occupied'),
-                                        )
-                                      ],
-                                    )),
-                              ),
-
-                              //Total Number of Ward Beds
-                              Card(
-                                elevation: 5,
-                                //margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                    height: 130,
-                                    width: 150,
-                                    margin: const EdgeInsets.all(10),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          state.data.total_wards_bed.toString(),
-                                          style: const TextStyle(fontSize: 32),
-                                        ),
-                                        const Text(
-                                          'Total Number of Ward Beds',
-                                          style: TextStyle(
-                                              fontSize: 14, color: Colors.blue),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        LinearPercentIndicator(
-                                          animation: true,
-                                          animationDuration: 1000,
-                                          lineHeight: 10,
-                                          percent: (0.01 *
-                                              state.data
-                                                  .percent_of_wards_bed_used),
-                                          barRadius: const Radius.circular(10),
-                                          progressColor: Colors.green,
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              10, 0, 0, 5),
-                                          child: Text(
-                                              '${state.data.percent_of_wards_bed_used}% Occupied'),
-                                        )
-                                      ],
-                                    )),
-                              ),
-                            ],
-                          ),
-
-                          //Circular Chart
-                          Card(
-                            margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: SfCircularChart(
-                              annotations: <CircularChartAnnotation>[
-                                CircularChartAnnotation(
-                                    height:
-                                        '80%', // Setting height and width for the circular chart annotation
-                                    width: '80%',
-                                    widget: Container(
-                                        child: PhysicalModel(
-                                            child: Container(),
-                                            shape: BoxShape.circle,
-                                            elevation: 10,
-                                            shadowColor: Colors.black,
-                                            color: const Color.fromRGBO(
-                                                230, 230, 230, 1)))),
-                                // CircularChartAnnotation(
-                                //     widget: Container(
-                                //         child: const Text('62%',
-                                //             style: TextStyle(
-                                //                 color: Color.fromRGBO(0, 0, 0, 0.5),
-                                //                 fontSize: 25))))
-                              ],
-                              title: ChartTitle(text: 'Bed Percentage'),
-                              tooltipBehavior: _tooltipBehavior,
-                              legend: Legend(
-                                  position: LegendPosition.bottom,
-                                  isVisible: true,
-                                  isResponsive: true,
-                                  overflowMode: LegendItemOverflowMode.wrap),
-                              series: <CircularSeries>[
-                                DoughnutSeries<TotalBed, String>(
-                                    dataSource: getTotalChart(
-                                        state.data.total_icu_bed,
-                                        state.data.total_wards_bed,
-                                        state.data.total_isolation_bed),
-                                    xValueMapper: (TotalBed data, _) =>
-                                        data.bed_type,
-                                    yValueMapper: (TotalBed data, _) =>
-                                        data.total,
-                                    dataLabelSettings: const DataLabelSettings(
-                                        isVisible: true),
-                                    radius: '100%',
-                                    innerRadius: '40%',
-                                    enableTooltip: true)
                               ],
                             ),
-                          ),
-                        ],
+
+                            //Circular Chart
+                            Card(
+                              margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: SfCircularChart(
+                                annotations: <CircularChartAnnotation>[
+                                  CircularChartAnnotation(
+                                      height:
+                                          '80%', // Setting height and width for the circular chart annotation
+                                      width: '80%',
+                                      widget: Container(
+                                          child: PhysicalModel(
+                                              child: Container(),
+                                              shape: BoxShape.circle,
+                                              elevation: 10,
+                                              shadowColor: Colors.black,
+                                              color: const Color.fromRGBO(
+                                                  230, 230, 230, 1)))),
+                                  // CircularChartAnnotation(
+                                  //     widget: Container(
+                                  //         child: const Text('62%',
+                                  //             style: TextStyle(
+                                  //                 color: Color.fromRGBO(0, 0, 0, 0.5),
+                                  //                 fontSize: 25))))
+                                ],
+                                title: ChartTitle(text: 'Bed Percentage'),
+                                tooltipBehavior: _tooltipBehavior,
+                                legend: Legend(
+                                    position: LegendPosition.bottom,
+                                    isVisible: true,
+                                    isResponsive: true,
+                                    overflowMode: LegendItemOverflowMode.wrap),
+                                series: <CircularSeries>[
+                                  DoughnutSeries<TotalBed, String>(
+                                      dataSource: getTotalChart(
+                                          state.data.total_icu_bed,
+                                          state.data.total_wards_bed,
+                                          state.data.total_isolation_bed),
+                                      xValueMapper: (TotalBed data, _) =>
+                                          data.bed_type,
+                                      yValueMapper: (TotalBed data, _) =>
+                                          data.total,
+                                      dataLabelSettings:
+                                          const DataLabelSettings(
+                                              isVisible: true),
+                                      radius: '100%',
+                                      innerRadius: '40%',
+                                      enableTooltip: true)
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
+                    onRefresh: () async {
+                      context.read<DashboardBloc>().add(LoadData());
+                    },
                   );
                 } else if (state is DataError) {
                   return Text(state.message.toString());
