@@ -15,3 +15,11 @@ editToken(String token) async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.setString('token', '');
 }
+
+// ID
+
+fetchID() async {
+  final prefs = await SharedPreferences.getInstance();
+  final String? id = prefs.getString('id');
+  return id;
+}

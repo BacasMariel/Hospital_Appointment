@@ -187,6 +187,16 @@ class _HomePageState extends State<HomePage> {
                                                 const TextStyle(fontSize: 14),
                                           ),
                                           Text(
+                                            'OB: ${state.data.ob_patient_count}',
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                          ),
+                                          Text(
+                                            'OB-ER: ${state.data.ob_er_patient_count}',
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                          ),
+                                          Text(
                                             'Others: ${state.data.other_division_count}',
                                             style:
                                                 const TextStyle(fontSize: 14),
@@ -657,6 +667,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   );
+                } else if (state is DataError) {
+                  return Text(state.message.toString());
                 } else {
                   return const Text('Something is Wrong');
                 }
@@ -781,21 +793,6 @@ class _MenuState extends State<Menu> {
               Navigator.of(context).pop();
             }),
             CustomListTile(Icons.build, 'Utilities', () {
-              // switch (state.status) {
-              //   case AuthenticationStatus.authenticated:
-              //     Navigator.of(context).push<void>(
-              //       Utility.route(),
-              //     );
-              //     break;
-              //   case AuthenticationStatus.unauthenticated:
-              //     Navigator.of(context).push<void>(
-              //       LoginPage.route(),
-              //     );
-              //     break;
-              //   default:
-              //     break;
-              // }
-
               if (state.user.type == 'administration') {
                 Navigator.of(context).push<void>(
                   Utility.route(),

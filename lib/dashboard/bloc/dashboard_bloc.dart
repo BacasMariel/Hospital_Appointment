@@ -17,7 +17,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       if (state is DataLoaded) {
         emit(DashboardInitial());
         try {
-          final data2 = _updateData(
+          final data2 = await _updateData(
             event.data.id,
             event.data.num_of_current_patient,
             event.data.num_of_discharge,
@@ -45,15 +45,17 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
             event.data.total_num_of_beds,
           );
 
-          await Future<void>.delayed(const Duration(seconds: 1));
-          emit(const DataMessage("Data Is Updated"));
-          DataApi? data1 = await _tryGetData();
-          if (data1 != null) {
-            print('data is not null');
-            print(data1.total_icu_bed);
-            emit(DataLoaded(data: data1));
+          if (data2 == null) {
+            emit(const DataError("Error Occured"));
           } else {
-            emit(const DataError('Data is null'));
+            await Future<void>.delayed(const Duration(seconds: 1));
+            emit(const DataMessage("Data Is Updated"));
+            DataApi? data1 = await _tryGetData();
+            if (data1 != null) {
+              emit(DataLoaded(data: data1));
+            } else {
+              emit(const DataError('Data is null'));
+            }
           }
         } catch (e) {
           print(e.toString());
@@ -91,11 +93,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       final data1 = await _dataRepository.getData(token);
       return data1;
     } catch (e) {
+      print(e.toString());
       return null;
     }
   }
 
-  Future<String> _updateData(
+  Future<String?> _updateData(
     int id,
     int num_of_current_patient,
     int num_of_discharge,
@@ -150,6 +153,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         total_wards_bed,
         total_num_of_beds,
         token.toString());
+    print(data1);
+
     return data1;
   }
 }

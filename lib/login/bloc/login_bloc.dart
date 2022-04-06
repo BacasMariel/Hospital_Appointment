@@ -66,7 +66,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             emit(state.copyWith(username: const Username.pure()));
           }
         }
-      } catch (_) {
+      } catch (e) {
+        print(e.toString());
         emit(state.copyWith(status: FormzStatus.submissionFailure));
         emit(const LoginError('Username/Password is Invalid'));
       }
