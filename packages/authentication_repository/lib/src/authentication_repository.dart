@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:authentication_repository/src/Models/model.dart';
-import 'package:authentication_repository/src/localstorage/Database.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'dart:convert';
@@ -70,15 +69,16 @@ class AuthenticationRepository {
     required String username,
     required String password,
   }) async {
-    await insertUsers(User(
-        1, 'admin', 'admin@test.com', 'administration', 'pass123', 'active'));
-    await insertUsers(
-        User(2, 'user', 'user@test.com', 'user', 'pass123', 'active'));
+    // await insertUsers(User(
+    //     1, 'admin', 'admin@test.com', 'administration', 'pass123', 'active'));
+    // await insertUsers(
+    //     User(2, 'user', 'user@test.com', 'user', 'pass123', 'active'));
 
     try {
-      _setHeaders() => {
+      _setHeaders(String token) => {
             'Content-type': 'application/json',
             'Accept': 'application/json',
+            'Authorization': token
           };
 
       _setBody() => {
@@ -90,7 +90,7 @@ class AuthenticationRepository {
 
       final response = await http.post(
           Uri.parse('http://192.168.254.102:8000/api/login'),
-          headers: _setHeaders(),
+          headers: _setHeaders(''),
           body: jsonEncode(_setBody()));
 
       if (response.statusCode == 200) {
@@ -98,6 +98,25 @@ class AuthenticationRepository {
         String bearerCode = bearerJson['access_token'];
         String bearer = "Bearer $bearerCode";
         _storeToken(bearer);
+
+        final userListResponse = await http.get(
+          Uri.parse('http://192.168.254.102:8000/api/getalluser'),
+          headers: _setHeaders(bearer),
+        );
+
+        dynamic jsonResponse = json.decode(userListResponse.body);
+
+        for (var i = 0; i < jsonResponse.length; i++) {
+          await insertUsers(User(
+              i + 1,
+              jsonResponse[i]['name'],
+              jsonResponse[i]['email'],
+              jsonResponse[i]['type'],
+              jsonResponse[i]['password'],
+              jsonResponse[i]['status']));
+
+          print('User Saved');
+        }
 
         await Future.delayed(
           const Duration(milliseconds: 300),
@@ -139,6 +158,7 @@ class AuthenticationRepository {
         return null;
       }
     } catch (e) {
+      print(e.toString());
       await Future.delayed(
         const Duration(milliseconds: 300),
         () => _controller.add(AuthenticationStatus.unauthenticated),
