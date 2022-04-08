@@ -72,7 +72,7 @@ packages:
     source: hosted
     version: "1.15.0"
   crypt:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: crypt
       url: "https://pub.dartlang.org"
